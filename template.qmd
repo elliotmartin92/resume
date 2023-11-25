@@ -10,7 +10,7 @@ cvmeta:
     left: SOPHiA Genetics
     right: elliotmartin92@gmail.com
   - title: Field
-    left: Bioinformatics, Software Engineering, Data Science
+    left: Bioinformatics, Software Development, Data Science
     right: github.com/elliotmartin92
 execute:
   echo: false
@@ -23,6 +23,7 @@ library(magrittr)
 
 ```{r}
 #| label: cvevents
+#| warning: false
 cvevents <- function(tbl, when, what, where, details) {
 
     command_start <- "\\cvevent"
@@ -32,7 +33,16 @@ cvevents <- function(tbl, when, what, where, details) {
         "{", tbl[[what]], "}",
         "{", tbl[[where]], "}")
     
-    tbl[[details]] <- sapply(tbl[[details]], function(x) paste0("{", x, "}", collapse = ","))
+# adds catch for lack of details to avoid empty bullet
+    detail_collapse = function(details){
+      if(details[1]==""){
+        paste0(details, collapse = ",")
+      }else{
+      paste0("{", details, "}", collapse = ",")
+      }
+    }
+    
+    tbl[[details]] <- sapply(tbl[[details]], detail_collapse)
     res <- paste0(res, "{",tbl[[details]],"}")
 
     cat(res, sep = "\n")
@@ -41,7 +51,7 @@ cvevents <- function(tbl, when, what, where, details) {
 
 # Summary
 
-* Developed dozens of custom NGS pipelines for renowned hospitals and testing labs
+* Developed 15+ custom NGS pipelines for renowned hospitals and testing labs
 
 * Aided PI to achieve over $2,000,000 in NIH grant funding by establishing bioinformatics pipelines
 to facilitate the research of dozens of team-members
@@ -49,6 +59,19 @@ to facilitate the research of dozens of team-members
 * Spearheaded a productive multi-year research project, managing and effectively communicating
 with several team-members from different disciplines
 
+# Education
+
+```{r}
+#| label: education
+#| output: asis
+#| warning: false
+tibble::tribble(
+    ~degree, ~uni, ~loc, ~dates, ~details,
+    "Ph.D. in Biology", "University of Albany", "Albany, NY", "Aug. 2015 - Mar. 2022", c("Thesis: Post-transcriptional control underlies germline stem cell differentiation and entry into meiosis in the female Drosophila."),
+    "Bachelor of Science, Biochemistry", "SUNY Geneseo", "Geneseo, NY", "Aug. 2011 - May. 2015", c("")
+) %>%
+    cvevents(when = "dates", what = "degree", where = "loc", details = "details")
+```
 
 # Experience
 
@@ -59,25 +82,23 @@ with several team-members from different disciplines
 tibble::tribble(
     ~role, ~institution, ~dates, ~details, ~tasks,
     "Bioinformatician", "SOPHiA Genetics", "Apr. 2022 - Present",
-    "Transparent Social Analytics, Department of Computational Social Science", c("Coordination of a project to build an Open Science platform with reusable code and tutorials", "Research on Open Science Practices", "Implementation of tools to enhance reproducibility and facilitate research with digital data in R"),
-    "Graduate Assistant", "University of Manchester", "Sep. 2018 - Feb. 2022",
-    "Sociology Department", c("Research on Disinformation on Social Media", "Analyses of large scale and unstructured data sets with R, Python and Bash"),
-    "Post Doctoral Researcher", "ETH Zurich", "Nov. 2017 - Aug. 2018", "Chair of Social Networks", c("Developing new methods to analyze social networks", "Implementing methods in libraries", "Gathering and analyzing large datsets from Social Media APIs"),
-    "Post Doctoral Researcher", "University of Konstanz", "Oct. 2015 - Oct. 2017", "Department of Computer & Information Science", c("Developing new methods to analyze social networks", "Implementing methods in libraries", "Webscraping and harmonizing a large corpus of football data"),
-    "Ph.D. Candidate", "University of Konstanz", "Nov. 2012 - Sep. 2015", "Department of Computer & Information Science", c("Developing new methods to analyze social networks", "Implementing methods in libraries")
+    "Client Facing Bioinformatics", c("Design, release, evaluate, and document targeted gene panels and analysis pipelines to effectively identify clinically relevant genomic alterations", "Analyze and summarize various types of NGS data to clients (e.g., SNPs/INDELs, CNV, RNA fusion, and PGx alleles).
+", "Communicate pipeline performance results to external clinical partners"),
+    "Graduate Assistant", "University of Albany", "Aug. 2019 - Mar. 2022",
+    "Biology Department", c("Established bioinformatics pipelines and scripts that are utilized by non-programmers to allow dozens of team-members to rapidly process data
+", "Developed interactive browser-based tool to increase the accessibility of bulk RNA-seq and single-cell seq data"),
+    "QC Virology Bioinformatics Intern", "Regeneron Pharmaceuticals Inc. - Remote", "Jun. - Aug. 2020", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Implementing methods in libraries", "Developed an R Shiny application for non-bioinformaticians to process their data"),
+    "Teaching Assistant", "University of Albany", "Aug. 2015 - May. 2019", "Department of Biology", c("Taught basic introductory lab skills to undergraduates and distilled principles of genetics and fostered discussions on genetics and ethics"),
 ) %>%
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
 ```
 
-# Education
+# Skills
+* Programming languages: Adept in R, proficient with Bash, experience in C and Python
 
-```{r }
-#| label: education
-#| output: asis
-tibble::tribble(
-    ~degree, ~uni, ~loc, ~dates, ~details,
-    "Ph.D. in Computer Science", "University of Konstanz", "Konstanz, Germany", "Nov. 2012 - Sep. 2015", c("Thesis: A Positional Approach for Network Centrality", "Developed and implemented new methods to assess network centrality"),
-    "Diploma in Business Mathematics", "KIT", "Karlsruhe, Germany", "Sep. 2006 - Jul. 2012", c("Thesis: Modularity Maximization", "Implementation and comparison of different clustering algorithms using Matlab")
-) %>%
-    cvevents(when = "dates", what = "degree", where = "loc", details = "details")
-```
+* Proficient with Data analysis and visualization, Linux, HPCC, Rmarkdown, version control (Git), Jira, and Gitlab
+
+* Experienced in cell culture and related techniques such as RNAi, transfection, and viral work
+
+* Skilled with molecular techniques including western blotting, qPCR, RNA work, and cloning
+
