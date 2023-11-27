@@ -175,11 +175,17 @@
 \vspace{-8pt}
 \textcolor{softcol}{\hrule}
 \vspace{6pt}
-\foreach \desc in {#4}{
-	*  \desc\\[3pt]
+
+% test if list is empty, if not enumerate each entry into an itemized list
+\ifthenelse{\equal{#4}{}}{
+}{
+	\begin{itemize}
+	\itemsep-1em
+	\foreach \desc in {#4}{
+	\item \desc\\[0pt]
+	}
+	\end{itemize}
 }
-	
-\vspace{3pt}
 }
 
 % creates a stretched box as 
