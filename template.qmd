@@ -4,7 +4,7 @@ title: Bioinformatician
 format:
   classic-cv-pdf: default
 cvcolor: 58748F #without `#`
-cvfont: raleway #texlive fonts like raleway,fetamont,gillius,comfortaa
+cvfont: fetamont #texlive fonts like raleway,fetamont,gillius,comfortaa
 cvmeta:
   - title: Bioinformatician
     left: SOPHiA Genetics
@@ -72,9 +72,7 @@ tibble::tribble(
 ) %>%
     cvevents(when = "dates", what = "degree", where = "loc", details = "details")
 ```
-
 # Experience
-
 
 ```{r}
 #| label: experience
@@ -87,7 +85,7 @@ tibble::tribble(
     "Graduate Assistant", "University of Albany", "Aug. 2019 - Mar. 2022",
     "Biology Department", c("Established bioinformatics pipelines and scripts that are utilized by non-programmers to allow dozens of team-members to rapidly process data
 ", "Developed interactive browser-based tool to increase the accessibility of bulk RNA-seq and single-cell seq data"),
-    "QC Virology Bioinformatics Intern", "Regeneron Pharmaceuticals Inc. - Remote", "Jun. - Aug. 2020", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Implementing methods in libraries", "Developed an R Shiny application for non-bioinformaticians to process their data"),
+    "QC Virology Bioinformatics Intern", "Regeneron Pharmaceuticals Inc. - Remote", "Jun. - Aug. 2020", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Developed an R Shiny application for non-bioinformaticians to process their data"),
     "Teaching Assistant", "University of Albany", "Aug. 2015 - May. 2019", "Department of Biology", c("Taught basic introductory lab skills to undergraduates and distilled principles of genetics and fostered discussions on genetics and ethics"),
 ) %>%
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
@@ -96,7 +94,7 @@ tibble::tribble(
 # Skills
 * Programming languages: Adept in R, proficient with Bash, experience in C and Python
 
-* Proficient with Data analysis and visualization, Linux, HPCC, Rmarkdown, version control (Git), Jira, and Gitlab
+* Proficient with Data analysis and visualization, Linux, HPCC, Rmarkdown/Quarto, \LaTeX, version control (Git), Jira, and Gitlab
 
 * Experienced in cell culture and related techniques such as RNAi, transfection, and viral work
 
