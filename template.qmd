@@ -84,7 +84,8 @@ tibble::tribble(
 ", "Communicate pipeline performance results to external clinical partners"),
     "Graduate Assistant", "University of Albany", "Aug. 2019 - Mar. 2022",
     "Biology Department", c("Established bioinformatics pipelines and scripts that are utilized by non-programmers to allow dozens of team-members to rapidly process data
-", "Developed interactive browser-based tool to increase the accessibility of bulk RNA-seq and single-cell seq data"),
+", "Developed interactive browser-based tool to increase the accessibility of bulk RNA-seq and single-cell seq data",
+"Discovered RNA regulatory mechanisms"),
     "QC Virology Bioinformatics Intern", "Regeneron Pharmaceuticals Inc. - Remote", "Jun. - Aug. 2020", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Developed an R Shiny application for non-bioinformaticians to process their data"),
     "Teaching Assistant", "University of Albany", "Aug. 2015 - May. 2019", "Department of Biology", c("Taught basic introductory lab skills to undergraduates and distilled principles of genetics and fostered discussions on genetics and ethics"),
 ) %>%
