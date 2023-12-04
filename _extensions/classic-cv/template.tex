@@ -133,6 +133,13 @@
 %remove section num		
 \renewcommand{\thesection}{}			
 
+%----------------------------------------------------------------------------------------
+%	 cites
+%----------------------------------------------------------------------------------------
+
+\usepackage[style=apa, sorting=none]{biblatex}
+\setlength\bibitemsep{\baselineskip}
+\addbibresource{Published.bib}
 
 %----------------------------------------------------------------------------------------
 %	custom sections
@@ -153,6 +160,7 @@
 {
 \footnotesize{#2} \hspace*{\fill} \footnotesize{#1}\\[1pt]
 }
+
 
 %----------------------------------------------------------------------------------------
 %	 CV EVENT

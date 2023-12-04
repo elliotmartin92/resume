@@ -1,0 +1,195 @@
+---
+author: Elliot Martin
+title: Bioinformatician
+format:
+  classic-cv-pdf
+cvcolor: 58748F #without `#`
+cvfont: fetamont #texlive fonts like raleway,fetamont,gillius,comfortaa
+cvmeta:
+  - title: Bioinformatician
+    left: SOPHiA Genetics
+    right: elliotmartin92@gmail.com
+  - title: Field
+    left: Bioinformatics, Software Development, Data Science
+    right: github.com/elliotmartin92
+execute:
+  echo: false
+bibliography: Published.bib
+---
+
+```{r setup}
+#| warning: false
+library(magrittr)
+library(vitae)
+```
+
+```{r}
+#| label: cvevents
+#| warning: false
+cvevents <- function(tbl, when, what, where, details) {
+
+    command_start <- "\\cvevent"
+
+    res <- paste0(
+        command_start, "{", tbl[[when]], "}", 
+        "{", tbl[[what]], "}",
+        "{", tbl[[where]], "}")
+    
+# adds catch for lack of details to avoid empty bullet
+    detail_collapse = function(details){
+      if(details[1]==""){
+        paste0(details, collapse = ",")
+      }else{
+      paste0("{", details, "}", collapse = ",")
+      }
+    }
+    
+    tbl[[details]] <- sapply(tbl[[details]], detail_collapse)
+    res <- paste0(res, "{",tbl[[details]],"}")
+
+    cat(res, sep = "\n")
+}
+```
+
+# Summary
+
+* Developed, benchmarked, documented, and released into production 15+ custom NGS pipelines for renowned hospitals and testing labs
+
+* Solved difficult bioinformatics problems from external stakeholders
+
+* Contributed to successful research program by establishing bioinformatics pipelines to facilitate the research of dozens of team-members
+
+* Spearheaded a productive multi-year research project, managing and effectively communicating with several team-members from different disciplines
+
+* Taught undergraduate courses and successfully mentored two undergraduates who achieved early medical school admittance
+
+
+# Education
+
+```{r}
+#| label: education
+#| output: asis
+#| warning: false
+tibble::tribble(
+    ~degree, ~uni, ~loc, ~dates, ~details,
+    "Ph.D. in Biology", "University of Albany", "University of Albany, Albany, NY", "Aug. 2015 - Mar. 2022", c("Dissertation Advisors: Prashanth Rangan PhD \\& Gabriele Fuchs PhD", "Dissertation Title: Post-transcriptional control underlies germline stem cell differentiation and entry into meiosis in the female Drosophila."),
+    "Bachelor of Science, Biochemistry", "SUNY Geneseo", "SUNY Geneseo, Geneseo, NY", "Aug. 2011 - May. 2015", c("")
+) %>%
+    cvevents(when = "dates", what = "degree", where = "loc", details = "details")
+```
+
+# Professional Experience
+
+```{r}
+#| label: professional_experience
+#| output: asis
+tibble::tribble(
+    ~role, ~institution, ~dates, ~details, ~tasks,
+    "Bioinformatician", "SOPHiA Genetics", "Apr. 2022 - Present",
+    "Client Facing Bioinformatics", c("Design, release, evaluate, and document targeted gene panels and analysis pipelines to effectively identify clinically relevant genomic alterations", "Analyze and summarize various types of NGS data to clients (e.g., SNPs/INDELs, CNV, RNA fusion, and PGx alleles)
+", "Communicate pipeline performance results to external clinical partners"),
+    "QC Virology Bioinformatics Intern", "Regeneron Pharmaceuticals Inc.", "Jun. - Aug. 2020", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Developed an R Shiny application for non-bioinformaticians to process their data"),
+    "Teaching Assistant", "University of Albany", "Aug. 2015 - May. 2019", "Department of Biology", c("Taught basic introductory lab skills to undergraduates and distilled principles of genetics and fostered discussions on genetics and ethics"),
+) %>%
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+```
+
+# Research Experience
+
+```{r}
+#| label: research_experience
+#| output: asis
+tibble::tribble(
+    ~role, ~institution, ~dates, ~details, ~tasks,
+    "Research Assistant", "Dr. Prash Rangan \\& Dr. Gaby Fuchs, University at Albany", "Aug. 2015 - Mar. 2022",
+    "Biology Department", c("Examined stem cell biology by applying molecular, biochemical, and bioinformatic methods to understand the tissue specific nature of ribosomopathies", "Established bioinformatics pipelines and scripts that are utilized by non-programmers to allow dozens of team-members to rapidly process data", "Used R-Shiny to develop interactive tools to integrate RNAseq, polysome-seq, and single-cell seq data of differentiating stem cells"),
+    "Undergraduate Researcher", "Dr. Janice Lovett, SUNY Geneseo.", "Sep. 2014 - May 2015", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Developed an R Shiny application for non-bioinformaticians to process their data"),
+    "Research Intern", "University of Pennsylvania, Dr. Ravi Radhakrishnan", "May 2014 - Aug. 2014", "Department of Biology", c("Molecular modeling of cell membrane to investigate membrane curvature sensing"),
+    "Research Technician II", "University at Buffalo, Dr. Olga Baker", "Dec. 2012 - Jan. 2013", "Department of Biology", c("Investigated effects of Sjogren's disease on occludens junctions the salivary gland through both biochemical means and fluorescence microscopy."),
+) %>%
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+```
+
+# Leadership and Teaching Experiance
+
+```{r}
+#| label: leadership_experience
+#| output: asis
+tibble::tribble(
+    ~role, ~institution, ~dates, ~details, ~tasks,
+    "Teaching Assistant", "University at Albany", "Aug. 2015 - Mar. 2019",
+    "Biology Department", c("Taught introductory lab skills to undergraduates
+s", "Distilled principles of genetics and fostered discussions on genetics and ethics"),
+    "Scout Leader", "Cornesse Patro", "Sep. 2010 - Aug. 2011", "Regeneron Pharmaceuticals Inc.", c("Guided and supervised children with outdoor activities and games")
+) %>%
+    cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
+```
+
+# Skills
+*Bioinformatics:*
+Bioinformatics pipeline development including, RNAseq, Single-cell seq, Cut and Run, Nanopore sequencing, Polysome-seq, Chromatin Immunoprecipitation sequencing (ChIP-seq) and, CAGE-seq. Sequence enrichment, data management, dashboarding, and R-Shiny
+\newline
+
+*Computer Skills:*
+Programming languages: Adept in R, proficient with Bash, experience in C and Python 
+Rmarkdown/Quarto, \LaTeX, Rshiny, R/Bioconductor, Linux, HPCC/AWS, version control (Git, GitLab), Microsoft Office, Adobe Photoshop, and Adobe Illustrator
+\newline
+
+*Molecular Biology:*
+Western blotting, immunoprecipitation (IP), qPCR, RNA/DNA purification, polysome profiling, northern blotting, cloning. Next-generation sequencing library preparation including, RNA sequencing (RNAseq), RNA immunoprecipitation sequencing (RIPseq), polysome sequencing. Certified to perform radiochemical assays and techniques
+\newline
+
+*Cell Biology:*
+Cell culture, RNA interference (RNAi), immunofluorescence (IF), transfection, and viral work
+Confocal Microscopy and Electron Microscopy (TEM & SEM)
+
+# Publications
+```{r}
+#| output: asis
+pubs = bibliography_entries("Published.bib") %>% dplyr::arrange(desc(issued))
+
+  cat("\\begin{refsection}")
+  cat(paste0("\\nocite{", pubs$id, "}"))
+  cat("\\printbibliography[heading=none]")
+  cat("\\end{refsection}")
+```
+
+# Abstracts and Presentations
+
+\textcolor{sectcol}{May 2022}
+
+**Doctoral Dissertation**: "Translation Control Tunes Drosophila Oogenesis"
+- *Recieved Distinguished Doctoral Dissertation Award*
+\newline
+
+\textcolor{sectcol}{Aug 2020}
+
+**Regeneron Intern Selected Presentations**: Talk, "Identification of a Biomarker Suite for Viral Infection Using Nanopore Sequencing"
+\newline
+
+**Regeneron Intern Poster Day**: Poster, "Identification of a Biomarker Suite for Viral Infection Using Nanopore Sequencing"
+\newline
+
+\textcolor{sectcol}{Aug 2019}
+
+**UAlbany RNA Retreat**: Poster, "A conserved nucleolar protein acts as a ribosome concentration sensor and controls stem cell differentiation via p53 in Drosophila."
+\newline
+
+\textcolor{sectcol}{Mar 2019}
+
+**2019 RNA Symposium**: Poster, "A conserved nucleolar protein acts as a ribosome concentration sensor and controls stem cell differentiation via p53 in Drosophila."
+\newline
+
+\textcolor{sectcol}{Oct 2018}
+
+**UAlbany Life Science Research Symposium**: Talk, "Ribosome levels regulate germline stem cell differentiation in Drosophila."
+\newline
+
+\textcolor{sectcol}{Apr 2018}
+
+**Northeast Society for Developmental Biology (NESDB) Meeting**: Poster, "Differential Ribosome Requirement During Germline Stem-Cell Differentiation."
+\newline
+
+\textcolor{sectcol}{Nov 2016}
+
+**Life Science Research Symposium**: Poster, "Catching the baton: dual modes of RNA regulation in late oogenesis ensures establishment of the next generation."
