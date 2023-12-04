@@ -67,8 +67,8 @@ with several team-members from different disciplines
 #| warning: false
 tibble::tribble(
     ~degree, ~uni, ~loc, ~dates, ~details,
-    "Ph.D. in Biology", "University of Albany", "Albany, NY", "Aug. 2015 - Mar. 2022", c("Thesis: Post-transcriptional control underlies germline stem cell differentiation and entry into meiosis in the female Drosophila."),
-    "Bachelor of Science, Biochemistry", "SUNY Geneseo", "Geneseo, NY", "Aug. 2011 - May. 2015", c("")
+    "Ph.D. in Biology", "University of Albany", "University of Albany, Albany, NY", "Aug. 2015 - Mar. 2022", c("Thesis: Post-transcriptional control underlies germline stem cell differentiation and entry into meiosis in the female Drosophila"),
+    "Bachelor of Science, Biochemistry", "SUNY Geneseo", "SUNY Geneseo, Geneseo, NY", "Aug. 2011 - May. 2015", c("")
 ) %>%
     cvevents(when = "dates", what = "degree", where = "loc", details = "details")
 ```
@@ -80,12 +80,12 @@ tibble::tribble(
 tibble::tribble(
     ~role, ~institution, ~dates, ~details, ~tasks,
     "Bioinformatician", "SOPHiA Genetics", "Apr. 2022 - Present",
-    "Client Facing Bioinformatics", c("Design, release, evaluate, and document targeted gene panels and analysis pipelines to effectively identify clinically relevant genomic alterations", "Analyze and summarize various types of NGS data to clients (e.g., SNPs/INDELs, CNV, RNA fusion, and PGx alleles).
+    "Client Facing Bioinformatics", c("Design, release, evaluate, and document targeted gene panels and analysis pipelines to effectively identify clinically relevant genomic alterations", "Analyze and summarize various types of NGS data to clients (e.g., SNPs/INDELs, CNV, RNA fusion, and PGx alleles)
 ", "Communicate pipeline performance results to external clinical partners"),
     "Graduate Assistant", "University of Albany", "Aug. 2019 - Mar. 2022",
     "Biology Department", c("Established bioinformatics pipelines and scripts that are utilized by non-programmers to allow dozens of team-members to rapidly process data
 ", "Developed interactive browser-based tool to increase the accessibility of bulk RNA-seq and single-cell seq data"),
-    "QC Virology Bioinformatics Intern", "Regeneron Pharmaceuticals Inc. - Remote", "Jun. - Aug. 2020", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Developed an R Shiny application for non-bioinformaticians to process their data"),
+    "QC Virology Bioinformatics Intern", "Regeneron Pharmaceuticals Inc.", "Jun. - Aug. 2020", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Developed an R Shiny application for non-bioinformaticians to process their data"),
     "Teaching Assistant", "University of Albany", "Aug. 2015 - May. 2019", "Department of Biology", c("Taught basic introductory lab skills to undergraduates and distilled principles of genetics and fostered discussions on genetics and ethics"),
 ) %>%
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
