@@ -113,7 +113,7 @@ tibble::tribble(
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
 ```
 
-# Leadership and Teaching Experiance
+# Leadership and Teaching Experience
 
 ```{r}
 #| label: leadership_experience

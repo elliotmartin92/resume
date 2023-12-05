@@ -91,7 +91,7 @@
 \usepackage{float}
 \usepackage{tikz}				
 \usetikzlibrary{shapes, backgrounds,mindmap, trees}
-
+\usepackage{enumitem}
 
 %----------------------------------------------------------------------------------------
 %	Color DEFINITIONS
@@ -205,7 +205,7 @@
 {
 
 \begin{tabular*}{1\textwidth}{p{13.6cm}  x{3.9cm}}
-	\textbf{#2} - \textcolor{bgcol}{#3} &   \vspace{2.5pt}\textcolor{sectcol}{#1}
+	\textbf{#2} \newline \textcolor{bgcol}{#3} &   \vspace{2.5pt}\textcolor{sectcol}{#1}
 \end{tabular*}
 
 \vspace{-8pt}
@@ -214,12 +214,13 @@
 % test if list is empty, if not enumerate each entry into an itemized list
 \ifthenelse{\equal{#4}{}}{
 }{
-	\begin{itemize}
-	\itemsep-20em
+	\begin{itemize}[topsep=0pt,itemsep=0pt,partopsep=0pt, parsep=0pt]
+
 	\foreach \desc in {#4}{
 	\item \desc\\[0pt]
 	}
 	\end{itemize}
+	\vspace{8pt}
 }
 }
 
