@@ -94,7 +94,7 @@ tibble::tribble(
 # Skills
 * Programming languages: Adept in R, proficient with Bash, experience in C and Python
 
-* Proficient with Data analysis and visualization, Linux, HPCC/Azure, Docker, Rmarkdown/Quarto, \LaTeX, version control (Git), Jira, and Gitlab
+* Proficient with Data analysis and visualization, dimensionality reduction, Linux, HPCC/Azure, Docker, Rmarkdown/Quarto, \LaTeX, version control (Git), Jira, and Gitlab
 
 * Experienced in cell culture and related techniques such as RNAi, transfection, and viral work
 
