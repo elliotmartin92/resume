@@ -139,7 +139,7 @@
 
 \usepackage[style=apa, sorting=none]{biblatex}
 \setlength\bibitemsep{\baselineskip}
-\addbibresource{Published.bib}
+\addbibresource{Published_bold.bib}
 
 %----------------------------------------------------------------------------------------
 %	custom sections
@@ -189,6 +189,33 @@
 }{
 	\begin{itemize}
 	\itemsep-1em
+	\foreach \desc in {#4}{
+	\item \desc\\[0pt]
+	}
+	\end{itemize}
+}
+}
+
+% same as \cvevent but with no horizontal line
+% param 1:	event time i.e. 2014 or 2011-2014 etc.
+% param 2:	event name (what did you do?)
+% param 3:	institution (where did you work / study)
+% param 4:	list of paragraphs
+\newcommand{\cvminorevent}[4]
+{
+
+\begin{tabular*}{1\textwidth}{p{13.6cm}  x{3.9cm}}
+	\textbf{#2} - \textcolor{bgcol}{#3} &   \vspace{2.5pt}\textcolor{sectcol}{#1}
+\end{tabular*}
+
+\vspace{-8pt}
+\vspace{14pt}
+
+% test if list is empty, if not enumerate each entry into an itemized list
+\ifthenelse{\equal{#4}{}}{
+}{
+	\begin{itemize}
+	\itemsep-20em
 	\foreach \desc in {#4}{
 	\item \desc\\[0pt]
 	}

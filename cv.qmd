@@ -19,17 +19,20 @@ bibliography: Published.bib
 
 ```{r setup}
 #| warning: false
-library(magrittr)
+library(tidyverse)
 library(vitae)
 ```
 
 ```{r}
 #| label: cvevents
 #| warning: false
-cvevents <- function(tbl, when, what, where, details) {
+cvevents <- function(tbl, when, what, where, details, hline=TRUE) {
 
+  if(hline){
     command_start <- "\\cvevent"
-
+  }else{
+    command_start <- "\\cvminorevent"
+  }
     res <- paste0(
         command_start, "{", tbl[[when]], "}", 
         "{", tbl[[what]], "}",
@@ -105,7 +108,7 @@ tibble::tribble(
     "Biology Department", c("Examined stem cell biology by applying molecular, biochemical, and bioinformatic methods to understand the tissue specific nature of ribosomopathies", "Established bioinformatics pipelines and scripts that are utilized by non-programmers to allow dozens of team-members to rapidly process data", "Used R-Shiny to develop interactive tools to integrate RNAseq, polysome-seq, and single-cell seq data of differentiating stem cells"),
     "Undergraduate Researcher", "Dr. Janice Lovett, SUNY Geneseo.", "Sep. 2014 - May 2015", "Regeneron Pharmaceuticals Inc.", c("Established bioinformatics pipelines for Nanopore direct RNA-seq for differential gene expression and differential isoform usage", "Developed an R Shiny application for non-bioinformaticians to process their data"),
     "Research Intern", "University of Pennsylvania, Dr. Ravi Radhakrishnan", "May 2014 - Aug. 2014", "Department of Biology", c("Molecular modeling of cell membrane to investigate membrane curvature sensing"),
-    "Research Technician II", "University at Buffalo, Dr. Olga Baker", "Dec. 2012 - Jan. 2013", "Department of Biology", c("Investigated effects of Sjogren's disease on occludens junctions the salivary gland through both biochemical means and fluorescence microscopy."),
+    "Research Technician II", "University at Buffalo, Dr. Olga Baker", "Dec. 2012 - Jan. 2013", "Department of Biology", c("Investigated effects of Sjogren's disease on occludens junctions the salivary gland through both biochemical means and fluorescence microscopy"),
 ) %>%
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
 ```
@@ -118,8 +121,7 @@ tibble::tribble(
 tibble::tribble(
     ~role, ~institution, ~dates, ~details, ~tasks,
     "Teaching Assistant", "University at Albany", "Aug. 2015 - Mar. 2019",
-    "Biology Department", c("Taught introductory lab skills to undergraduates
-s", "Distilled principles of genetics and fostered discussions on genetics and ethics"),
+    "Biology Department", c("Taught introductory lab skills to undergraduates", "Distilled principles of genetics and fostered discussions on genetics and ethics"),
     "Scout Leader", "Cornesse Patro", "Sep. 2010 - Aug. 2011", "Regeneron Pharmaceuticals Inc.", c("Guided and supervised children with outdoor activities and games")
 ) %>%
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
@@ -127,12 +129,12 @@ s", "Distilled principles of genetics and fostered discussions on genetics and e
 
 # Skills
 *Bioinformatics:*
-Bioinformatics pipeline development including, RNAseq, Single-cell seq, Cut and Run, Nanopore sequencing, Polysome-seq, Chromatin Immunoprecipitation sequencing (ChIP-seq) and, CAGE-seq. Sequence enrichment, data management, dashboarding, and R-Shiny
+Bioinformatics pipeline development including, RNAseq, Single-cell seq, Cut and Run, Nanopore sequencing, Polysome-seq, Chromatin Immunoprecipitation sequencing (ChIP-seq) and, CAGE-seq. Sequence enrichment, dimensionality reduction, data management and aggregation, and dashboarding
 \newline
 
 *Computer Skills:*
 Programming languages: Adept in R, proficient with Bash, experience in C and Python 
-Rmarkdown/Quarto, \LaTeX, Rshiny, R/Bioconductor, Linux, HPCC/AWS, version control (Git, GitLab), Microsoft Office, Adobe Photoshop, and Adobe Illustrator
+Rmarkdown/Quarto, \LaTeX, R-shiny, R/Bioconductor, Linux, HPCC/AWS, version control (Git, GitLab), Microsoft Office, Adobe Photoshop, and Adobe Illustrator
 \newline
 
 *Molecular Biology:*
@@ -146,50 +148,54 @@ Confocal Microscopy and Electron Microscopy (TEM & SEM)
 # Publications
 ```{r}
 #| output: asis
-pubs = bibliography_entries("Published.bib") %>% dplyr::arrange(desc(issued))
 
-  cat("\\begin{refsection}")
-  cat(paste0("\\nocite{", pubs$id, "}"))
-  cat("\\printbibliography[heading=none]")
-  cat("\\end{refsection}")
+readr::read_lines("Published.bib") %>% 
+  str_replace_all("Martin, Elliot Todd", "\\\\textbf{Martin, E. T.}") %>% 
+  str_replace_all("Martin, Elliot T", "\\\\textbf{Martin, E. T.}") %>% 
+  str_replace_all("Martin, ET", "\\\\textbf{Martin, E. T.}") %>% 
+  readr::write_lines("Published_bold.bib") 
+
+
+pubs = bibliography_entries("Published_bold.bib")
+
+is_first_author = function(author_list){
+  # return(author_list[[1]][[1]])
+  is_first = grep("Martin", author_list[[1]])
+  if (identical(is_first, integer(0))) {
+    return(FALSE)
+  }else{
+    return(TRUE)
+  }
+}
+
+is_first_author = sapply(as.list(pubs$author), is_first_author)
+pubs$first_author = is_first_author
+
+pubs = pubs %>% vitae::arrange(desc(issued), desc(first_author))
+
+cat("\\begin{refsection}")
+cat(paste0("\\nocite{", pubs$id, "}"))
+cat("\\printbibliography[heading=none]")
+cat("\\end{refsection}")
 ```
 
-# Abstracts and Presentations
+# Presentations
 
-\textcolor{sectcol}{May 2022}
+```{r}
+#| label: presentations
+#| output: asis
+#| warning: false
+tibble::tribble(
+    ~degree, ~uni, ~loc, ~dates, ~details,
+    "Doctoral Dissertation", "", "\"Translation Control Tunes Drosophila Oogenesis\"", "May 2022", c("Recieved Distinguished Doctoral Dissertation Award"),
+    "Regeneron Intern Selected Presentations: Talk", "", "\"Identification of a Biomarker Suite for Viral Infection Using Nanopore Sequencing", "Aug. 2020", c(""),
+    "Regeneron Intern Poster Day: Poster", "", "\"Identification of a Biomarker Suite for Viral Infection Using Nanopore Sequencing", "Aug. 2020", c(""),
+    "UAlbany RNA Retreat: Poster", "", "\"A conserved nucleolar protein acts as a ribosome concentration sensor and controls stem cell differentiation via p53 in Drosophila", "Aug. 2019", c(""),
+    "2019 RNA Symposium: Poster", "", "\"A conserved nucleolar protein acts as a ribosome concentration sensor and controls stem cell differentiation via p53 in Drosophila", "Mar. 2019", c(""),
+    "UAlbany Life Science Research Symposium: Poster", "", "\"Ribosome levels regulate germline stem cell differentiation in Drosophila", "Oct. 2019", c(""),
+    "Northeast Society for Developmental Biology (NESDB) Meeting: Poster", "", "\"Differential Ribosome Requirement During Germline Stem-Cell Differentiation", "Apr. 2018", c(""),
+    "Life Science Research Symposium: Poster", "", "\"Catching the baton: dual modes of RNA regulation in late oogenesis ensures establishment of the next generation", "Apr. 2016", c(""),
+) %>%
+    cvevents(when = "dates", what = "degree", where = "loc", details = "details", hline = FALSE)
+```
 
-**Doctoral Dissertation**: "Translation Control Tunes Drosophila Oogenesis"
-- *Recieved Distinguished Doctoral Dissertation Award*
-\newline
-
-\textcolor{sectcol}{Aug 2020}
-
-**Regeneron Intern Selected Presentations**: Talk, "Identification of a Biomarker Suite for Viral Infection Using Nanopore Sequencing"
-\newline
-
-**Regeneron Intern Poster Day**: Poster, "Identification of a Biomarker Suite for Viral Infection Using Nanopore Sequencing"
-\newline
-
-\textcolor{sectcol}{Aug 2019}
-
-**UAlbany RNA Retreat**: Poster, "A conserved nucleolar protein acts as a ribosome concentration sensor and controls stem cell differentiation via p53 in Drosophila."
-\newline
-
-\textcolor{sectcol}{Mar 2019}
-
-**2019 RNA Symposium**: Poster, "A conserved nucleolar protein acts as a ribosome concentration sensor and controls stem cell differentiation via p53 in Drosophila."
-\newline
-
-\textcolor{sectcol}{Oct 2018}
-
-**UAlbany Life Science Research Symposium**: Talk, "Ribosome levels regulate germline stem cell differentiation in Drosophila."
-\newline
-
-\textcolor{sectcol}{Apr 2018}
-
-**Northeast Society for Developmental Biology (NESDB) Meeting**: Poster, "Differential Ribosome Requirement During Germline Stem-Cell Differentiation."
-\newline
-
-\textcolor{sectcol}{Nov 2016}
-
-**Life Science Research Symposium**: Poster, "Catching the baton: dual modes of RNA regulation in late oogenesis ensures establishment of the next generation."
