@@ -97,6 +97,8 @@ tibble::tribble(
     cvevents(when = "dates", what = "role", where = "institution", details = "tasks")
 ```
 
+{{< pagebreak >}}
+
 # Research Experience
 
 ```{r}
@@ -144,6 +146,8 @@ Western blotting, immunoprecipitation (IP), qPCR, RNA/DNA purification, polysome
 *Cell Biology:*
 Cell culture, RNA interference (RNAi), immunofluorescence (IF), transfection, and viral work
 Confocal Microscopy and Electron Microscopy (TEM & SEM)
+
+{{< pagebreak >}}
 
 # Publications
 ```{r}
